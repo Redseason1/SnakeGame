@@ -1,7 +1,6 @@
 package SnakeGame;
 
 import javax.swing.JPanel;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -12,7 +11,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	static final int UNIT_SIZE = 50;  //格數大小
 	static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);  //視窗格數(總面積/格數面積)
 	static final int DELAY = 100;
-	final int x[] = new int[GAME_UNITS];
+	final int x[] = new int[GAME_UNITS];	//蛇的身體
 	final int y[] = new int[GAME_UNITS];
 	int bodyParts = 6;
 	int applesEaten;
@@ -23,7 +22,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	Timer timer;
 	Random random;
 	
-	GamePanel(){
+	public GamePanel(){
 		random = new Random();
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
 		this.setBackground(Color.black);
@@ -62,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener{
 				}
 				else {
 					//g.setColor(new Color(45,180,0));
-					g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
+					g.setColor(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));	//RGB的身體
 					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}			
 			}
@@ -88,18 +87,18 @@ public class GamePanel extends JPanel implements ActionListener{
 		}
 		
 		switch(direction) {
-		case 'U':
-			y[0] = y[0] - UNIT_SIZE;
-			break;
-		case 'D':
-			y[0] = y[0] + UNIT_SIZE;
-			break;
-		case 'L':
-			x[0] = x[0] - UNIT_SIZE;
-			break;
-		case 'R':
-			x[0] = x[0] + UNIT_SIZE;
-			break;
+			case 'U':
+				y[0] = y[0] - UNIT_SIZE;
+				break;
+			case 'D':
+				y[0] = y[0] + UNIT_SIZE;
+				break;
+			case 'L':
+				x[0] = x[0] - UNIT_SIZE;
+				break;
+			case 'R':
+				x[0] = x[0] + UNIT_SIZE;
+				break;
 		}		
 	}
 
@@ -114,7 +113,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	public void checkCollisions() {
 		//checks if head collides with body
 		for(int i = bodyParts;i>0;i--) {
-			if((x[0] == x[i])&& (y[0] == y[i])) {
+			if((x[0] == x[i]) && (y[0] == y[i])) {
 				running = false;
 			}
 		}
